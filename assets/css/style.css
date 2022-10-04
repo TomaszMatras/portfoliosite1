@@ -17,7 +17,19 @@ body{
     background-color: var(--var-bg-color);
 
 }
-/* ===== Scrollbar CSS ===== */
+
+/* rev */
+.rev{
+    position: relative;
+    transform: translateY(150px);
+    opacity: 0;
+    transition: transform 450ms ease-in, opacity 450ms ease-in;
+  }
+  .rev.revive{
+    transform: translateY(0);
+    opacity: 1;
+  }
+
   /* Firefox */
   * {
     scrollbar-width: auto;
@@ -93,9 +105,23 @@ header{
     color: var(--var-text-muted);
     font-weight: bold;
     transition: background-color 150ms ease-in-out , color 150ms ease-in-out;
+    position: relative;
 }
 .navul a:hover{
     color: var(--var-text-yellow)
+}
+
+.navul a::after{
+    content: "";
+    width: 0%;
+    position: absolute;
+    height: 3px;
+    border-radius: 10%;
+    background-color: var(--var-text-yellow);
+    transition: width 150ms ease-in-out;
+}
+.navul a:hover::after{
+    width: 101%;
 }
 .burger{
     display: none;
@@ -515,6 +541,9 @@ header{
     margin: 3rem;
 }
 /* footer */
+footer{
+    transform: translateY(0px)!important;
+}
 .footer-up .brand {
   margin-bottom: 2rem;
   font-size: 2rem;
@@ -668,6 +697,9 @@ footer hr{
    }
 }
 @media (max-width: 768px){
+    .navul a::after{
+        content: unset;
+    }
     .blogs{
         grid-template-columns: 1fr 1fr;
     }

@@ -36,7 +36,6 @@ let limit = document.body.scrollHeight;
 const top1 = document.querySelector('.top')
 let scroll1Y = window.scrollY;
 function scrollEV() {
-  console.log('scroll ' + scroll1Y)
  limit = document.body.scrollHeight, 
    scroll1Y = window.scrollY;
    if(scroll1Y > 100){
@@ -49,5 +48,22 @@ function scrollEV() {
    }else{
     top1.style = ""
    }
+   reveal() 
 }
 window.onscroll = scrollEV
+reveal() 
+//rev
+
+function reveal() {
+  var reveals = document.querySelectorAll(".rev");
+  for (var i = 0; i < reveals.length; i++) {
+    var windowHeight = window.innerHeight;
+    var elementTop = reveals[i].getBoundingClientRect().top;
+    var elementVisible = 50;
+    if (elementTop < windowHeight - elementVisible) {
+      reveals[i].classList.add("revive");
+    } else {
+      reveals[i].classList.remove("revive");
+    }
+  }
+}
