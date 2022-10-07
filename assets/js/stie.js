@@ -15,11 +15,12 @@ carouselControl.addEventListener('click', e => {
   if(targetButton){
     let targetIndex = carouselDots.findIndex(cur => cur === targetButton);
     let currentButton = document.querySelector('.control-button-active');
+    let currentItem = document.querySelector('.aactive');
     currentButton.classList.remove('control-button-active');
     carouselDots[targetIndex].classList.add('control-button-active');
-    let translate = 90 * targetIndex;
-    carousel.style = 'transform: translateY(-'+translate+'vh)' ;
-
+    currentItem.classList.remove('aactive')
+    carouselItems[targetIndex].classList.add('aactive')
+    console.log(carouselItems[targetIndex])
   }
 })
 
@@ -55,11 +56,11 @@ reveal()
 //rev
 
 function reveal() {
-  var reveals = document.querySelectorAll(".rev");
-  for (var i = 0; i < reveals.length; i++) {
-    var windowHeight = window.innerHeight;
-    var elementTop = reveals[i].getBoundingClientRect().top;
-    var elementVisible = 50;
+  const reveals = document.querySelectorAll(".rev");
+  for (let i = 0; i < reveals.length; i++) {
+    let windowHeight = window.innerHeight;
+    let elementTop = reveals[i].getBoundingClientRect().top;
+    let elementVisible = 50;
     if (elementTop < windowHeight - elementVisible) {
       reveals[i].classList.add("revive");
     } else {
@@ -67,3 +68,21 @@ function reveal() {
     }
   }
 }
+//img popup
+const gallery = document.querySelector(".gallery")
+const popup = document.querySelector(".popup")
+const cross = document.querySelector(".cross")
+const galI = Array.from(gallery.children)
+
+cross.addEventListener("click", () => {
+  popup.classList.remove('pop');
+})
+gallery.addEventListener("click", e => {
+  const Gtarget = e.target.closest('.gallery-item')
+  if (Gtarget){
+  const Itarger = galI.findIndex(galler => galler === Gtarget)
+  popup.classList.add("pop")
+  const popIMG = popup.querySelector(".img-upscale")
+  popIMG.querySelector('img').src = galI[Itarger].querySelector("img").src
+  }
+})
